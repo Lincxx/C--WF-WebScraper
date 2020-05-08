@@ -45,10 +45,29 @@ namespace WebPageCloner
             {
                 fw.Write(doc.ParsedText);
             }
+            MessageBox.Show("Awesome you downloaded the page");
 
 
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            string URL = textBoxURL.Text; //getting the text from the text box
+            HtmlWeb hw = new HtmlWeb(); //this will help us load the htmt doc
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            
+            //loaded doc
+            doc = hw.Load(URL);
+
+            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a"))
+            {
+                listBox1.Items.Add(link.GetAttributeValue("href", ""));
+            }
+
+            
+        }
     }
 }
